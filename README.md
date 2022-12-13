@@ -10,10 +10,11 @@ Setting up the System:
     env/Scripts/activate.bat
 5. Type this in (if not yet installed): 
     pip install -r requirements.txt
-5. Access the system by typing these commands:
+6. Access the system by typing these commands:
     py manage.py makemigrations
     py manage.py migrate
     py manage.py collectstatic
     py manage.py runserver
       Ctrl+click 127.0.0.1:8000
- 
+    Create admin account:
+        python manage.py createsuperuser
