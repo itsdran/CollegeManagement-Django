@@ -7,57 +7,12 @@
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{total_attendance}}</h3>
-
-                        <p>Total Attendance</p>
-                    </div>
-                    <div class="icon">
-                      <i class="nav-icon fas fa-calendar-alt"></i>
-                    </div>
-                    {# <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> #}
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3>{{ percent_present }}<sup style="font-size: 20px">%</sup></h3>
-
-                        <p>Percentage Present</p>
-                    </div>
-                    <div class="icon">
-                      <i class="nav-icon fas fa-calendar-check"></i>
-                    </div>
-                    {# <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> #}
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h3>{{percent_absent}}<sup style="font-size: 20px">%</sup></h3>
-
-                        <p>Percentage Absent</p>
-                    </div>
-                    <div class="icon">
-                      <i class="nav-icon fas fa-calendar-minus"></i>
-                    </div>
-                    {# <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> #}
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            
+            <div class="col-lg-12 col-6">
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
                         <h3>{{total_subject}}</h3>
-
                         <p>Total Subject</p>
                     </div>
                     <div class="icon">
@@ -68,6 +23,40 @@
             </div>
             <!-- ./col -->
         </div>
+        <div class="card card-dark">
+            <div class="card-header"><h3 class="card-title">Class Schedule</h3>
+            </div>
+           <div class="table p-2">
+        
+               <table class="table table-bordered">
+                   <tr>
+                       <th>Class</th>
+                       <th>Section</th>
+                       <th>Schedule</th>
+                    <th>Credits</th>
+                </tr>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{feedback.feedback}}</td>
+                    <td>
+                          
+                        {% if feedback.reply == "" %}
+                            <p class="badge badge-warning">No Response Yet</p>
+                            {% else %}
+                            {{feedback.reply}}
+                        {% endif %}
+                            {% include "main_app/form_template.html" with messages=messages  form=form button_text="Submit Feedback"%}
+                    </td>              <td>{{feedback.created_at}}</td>
+                    
+                    </tr>
+                    
+                    {% endfor %}
+                    
+                </table>
+                {% include "main_app/form_template.html" with messages=messages  form=form button_text="Not yet enrolled? Click here!"%}
+            </div>
+            </div>
        </section>
 {% endblock content %}
 
