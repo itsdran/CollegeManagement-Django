@@ -81,11 +81,7 @@
 
                     </ul>
                 </li>
-
-
-
-
-
+                <!--End Subject-->
                 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -378,7 +374,7 @@
                             
                             {% else %}
                             <!-- Brand Logo -->
-                            <a href="" class="brand-link">
+                            <a href="{% url 'admin_home' %}" class="brand-link">
 
                                 <img src="{% static 'dist/img/AdminLTELogo.png' %} " alt="AdminLTE Logo"
                                     class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -400,13 +396,11 @@
 
                                 <!-- Sidebar Menu -->
                                 <nav class="mt-2">
-                                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                                        data-accordion="false">
+                                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                                         <li class="nav-item">
                                             {% url 'student_home' as student_home %}
-                                            <a href="{{student_home}}"
-                                                class="nav-link {% if student_home == request.path %} active {% endif %}">
+                                            <a href="{{student_home}}" class="nav-link {% if student_home == request.path %} active {% endif %}">
                                                 <i class="nav-icon fas fa-home"></i>
                                                 <p>
                                                     Home
@@ -427,6 +421,41 @@
                                             </a>
                                         </li>
 
+                                        <!--Star Subject-->
+                                        <li class="nav-item has-treeview">
+                                            <a href="#" class="nav-link">
+                                                <i class="nav-icon fas fa-book"></i>
+                                                <p>
+                                                    Subject
+                                                    <i class="fas fa-angle-left right"></i>
+                                                </p>
+                                            </a>
+                                            <ul class="nav nav-treeview">
+                                                <li class="nav-item">
+                                                    {% url 'add_subject' as add_subject %}
+                                                    <a href="{{add_subject}}"
+                                                        class="nav-link  {% if add_subject == request.path %} active {% endif %}">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>
+                                                            Add Subject
+
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    {% url 'manage_subject' as manage_subject %}
+                                                    {% url 'edit_subject' subject_id as edit_subject %}
+                                                    <a href="{{manage_subject}}"
+                                                        class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>
+                                                            Manage Subject
+
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        <!--End Subject-->
 
                                         <li class="nav-item">
                                             {% url 'student_view_notification' as student_view_notification %}
@@ -470,6 +499,7 @@
                                     </ul>
                                 </nav>
                                 <!-- /.sidebar-menu -->
-                            </div>
-                            <!-- /.sidebar -->
+                            </div>-->
+        
+    </div>                       <!-- /.sidebar -->
 </aside>
