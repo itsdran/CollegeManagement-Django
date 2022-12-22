@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\xampp\htdocs\CollegeManagement-Django\env"
+VIRTUAL_ENV="C:\Users\Dran\Desktop\CollegeManagement-Django\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
