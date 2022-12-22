@@ -2,15 +2,17 @@
 {% load static %}
 {% block page_title %}{{page_title}}{% endblock page_title %}
 {% block content %}
+
 <section class="content">
     <div class="container-fluid">
-        
-            <div class="col-lg-3 col-6">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            
+            <div class="col-lg-12 col-6">
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
                         <h3>{{total_subject}}</h3>
-
                         <p>Total Subject</p>
                     </div>
                     <div class="icon">
@@ -21,16 +23,53 @@
             </div>
             <!-- ./col -->
         </div>
+        <div class="card card-dark">
+            <div class="card-header"><h3 class="card-title">Class Schedule</h3>
+            </div>
+           <div class="table p-2">
+        
+               <table class="table table-bordered">
+                   <tr>
+                       <th>Class</th>
+                       <th>Section</th>
+                       <th>Schedule</th>
+                    <th>Credits</th>
+                </tr>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{feedback.feedback}}</td>
+                    <td>
+                          
+                        {% if feedback.reply == "" %}
+                            <p class="badge badge-warning">No Response Yet</p>
+                            {% else %}
+                            {{feedback.reply}}
+                        {% endif %}
+                            {% include "main_app/form_template.html" with messages=messages  form=form button_text="Submit Feedback"%}
+                    </td>              <td>{{feedback.created_at}}</td>
+                    
+                    </tr>
+                    
+                    {% endfor %}
+                    
+                </table>
+                {% include "main_app/form_template.html" with messages=messages  form=form button_text="Not yet enrolled? Click here!"%}
+            </div>
+            </div>
        </section>
 {% endblock content %}
 
 {% block custom_js %}
  
+})
+
+  </script>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
 
         <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
+        https://firebase.google.com/docs/web/setup#available-libraries -->
         <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-messaging.js"></script>
     
