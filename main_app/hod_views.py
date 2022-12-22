@@ -97,7 +97,7 @@ def add_staff(request):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password')
-            course = form.cleaned_data.get('course')
+            #course = form.cleaned_data.get('course')
             passport = request.FILES.get('profile_pic')
             fs = FileSystemStorage()
             filename = fs.save(passport.name, passport)
@@ -107,7 +107,7 @@ def add_staff(request):
                     email=email, password=password, user_type=2, first_name=first_name, last_name=last_name, profile_pic=passport_url)
                 user.gender = gender
                 user.address = address
-                user.staff.course = course
+                #user.staff.course = course
                 user.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_staff'))
@@ -131,8 +131,8 @@ def add_student(request):
             email = student_form.cleaned_data.get('email')
             gender = student_form.cleaned_data.get('gender')
             password = student_form.cleaned_data.get('password')
-            course = student_form.cleaned_data.get('course')
-            session = student_form.cleaned_data.get('session')
+            #course = student_form.cleaned_data.get('course')
+            #session = student_form.cleaned_data.get('session')
             passport = request.FILES['profile_pic']
             fs = FileSystemStorage()
             filename = fs.save(passport.name, passport)
@@ -142,8 +142,8 @@ def add_student(request):
                     email=email, password=password, user_type=3, first_name=first_name, last_name=last_name, profile_pic=passport_url)
                 user.gender = gender
                 user.address = address
-                user.student.session = session
-                user.student.course = course
+                #.student.session = session
+                #user.student.course = course
                 user.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_student'))
@@ -185,13 +185,13 @@ def add_subject(request):
     if request.method == 'POST':
         if form.is_valid():
             name = form.cleaned_data.get('name')
-            course = form.cleaned_data.get('course')
+            #course = form.cleaned_data.get('course')
             staff = form.cleaned_data.get('staff')
             try:
                 subject = Subject()
                 subject.name = name
                 subject.staff = staff
-                subject.course = course
+                #subject.course = course
                 subject.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_subject'))
@@ -208,7 +208,7 @@ def manage_staff(request):
     allStaff = CustomUser.objects.filter(user_type=2)
     context = {
         'allStaff': allStaff,
-        'page_title': 'Manage Staff'
+        'page_title': 'Manage Faculty'
     }
     return render(request, "hod_template/manage_staff.html", context)
 
@@ -246,7 +246,7 @@ def edit_staff(request, staff_id):
     context = {
         'form': form,
         'staff_id': staff_id,
-        'page_title': 'Edit Staff'
+        'page_title': 'Edit Faculty'
     }
     if request.method == 'POST':
         if form.is_valid():
@@ -257,7 +257,7 @@ def edit_staff(request, staff_id):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
-            course = form.cleaned_data.get('course')
+            #course = form.cleaned_data.get('course')
             passport = request.FILES.get('profile_pic') or None
             try:
                 user = CustomUser.objects.get(id=staff.admin.id)
@@ -274,7 +274,7 @@ def edit_staff(request, staff_id):
                 user.last_name = last_name
                 user.gender = gender
                 user.address = address
-                staff.course = course
+                #staff.course = course
                 user.save()
                 staff.save()
                 messages.success(request, "Successfully Updated")
@@ -284,8 +284,8 @@ def edit_staff(request, staff_id):
         else:
             messages.error(request, "Please fil form properly")
     else:
-        user = CustomUser.objects.get(id=staff_id)
-        staff = Staff.objects.get(id=user.id)
+        #user = CustomUser.objects.get(id=staff_id)
+        #staff = Staff.objects.get(id=user.id)
         return render(request, "hod_template/edit_staff_template.html", context)
 
 
@@ -306,7 +306,7 @@ def edit_student(request, student_id):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
-            course = form.cleaned_data.get('course')
+            #course = form.cleaned_data.get('course')
             session = form.cleaned_data.get('session')
             passport = request.FILES.get('profile_pic') or None
             try:
@@ -325,7 +325,7 @@ def edit_student(request, student_id):
                 student.session = session
                 user.gender = gender
                 user.address = address
-                student.course = course
+                #student.course = course
                 user.save()
                 student.save()
                 messages.success(request, "Successfully Updated")
@@ -373,13 +373,13 @@ def edit_subject(request, subject_id):
     if request.method == 'POST':
         if form.is_valid():
             name = form.cleaned_data.get('name')
-            course = form.cleaned_data.get('course')
+            #course = form.cleaned_data.get('course')
             staff = form.cleaned_data.get('staff')
             try:
                 subject = Subject.objects.get(id=subject_id)
                 subject.name = name
                 subject.staff = staff
-                subject.course = course
+                #subject.course = course
                 subject.save()
                 messages.success(request, "Successfully Updated")
                 return redirect(reverse('edit_subject', args=[subject_id]))
@@ -613,7 +613,7 @@ def admin_view_profile(request):
 def admin_notify_staff(request):
     staff = CustomUser.objects.filter(user_type=2)
     context = {
-        'page_title': "Send Notifications To Staff",
+        'page_title': "Send Notifications To Faculty",
         'allStaff': staff
     }
     return render(request, "hod_template/staff_notification.html", context)
