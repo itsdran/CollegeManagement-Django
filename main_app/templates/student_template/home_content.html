@@ -1,6 +1,6 @@
 {% extends 'main_app/base.html' %}
 {% load static %}
-{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block page_title %}Staff Panel{% endblock page_title %}
 {% block content %}
 
 <section class="content">
@@ -16,10 +16,10 @@
                         <p>Total Subject</p>
                     </div>
                     <div class="icon">
-                      <i class="nav-icon fas fa-book"></i>
-                    </div>
-                    {# <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> #}
-                </div>
+                        <i class="nav-icon fas fa-book"></i>
+                      </div>
+                      <a href="{% url 'manage_subject' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
             </div>
             <!-- ./col -->
         </div>
