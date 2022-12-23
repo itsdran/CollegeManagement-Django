@@ -102,7 +102,17 @@
                           </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        {% url 'add_faculty_subject' as add_faculty_subject %}
+                        <a href="{{add_faculty_subject}}"
+                            class="nav-link  {% if add_faculty_subject == request.path %} active {% endif %}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Add Subject
 
+                            </p>
+                        </a>
+                    </li>
                 <li class="nav-item">
                     {% url 'manage_staff' as manage_staff %}
                     {% url 'edit_staff' staff_id as edit_staff %}
@@ -135,6 +145,16 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     Add Student
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            {% url 'add_student_subject' as add_student_subject%}
+                            <a href="{{add_student_subject}}" class="nav-link  {% if add_student_subject == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Add Subject
 
                                 </p>
                             </a>
@@ -283,7 +303,14 @@
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
-                                    
+                                    <li class="nav-item">
+                                        {% url 'add_subject' as add_subject %}
+                                        <a href="{{add_subject}}"
+                                            class="nav-link  {% if add_subject == request.path %} active {% endif %}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Add Subject
+                                            </p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -293,7 +320,7 @@
                                             class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                                View Subject
+                                                Manage Subject
             
                                             </p>
                                         </a>
@@ -312,7 +339,14 @@
                                 </a>
             
                                 <ul class="nav nav-treeview">
-                                    
+                                    <li class="nav-item">
+                                        {% url 'add_student' as add_student%}
+                                        <a href="{{add_student}}" class="nav-link  {% if add_student == request.path %} active {% endif %}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Add Student
+            
+                                            </p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -323,7 +357,7 @@
                                             class="nav-link  {% if edit_student == request.path or manage_student == request.path %} active {% endif %}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                                View Student
+                                                Manage Student
             
                                             </p>
                                         </a>
