@@ -211,7 +211,7 @@ def add_faculty_subject(request):
     }
     if request.method == 'POST':
         if form.is_valid():
-            #name = form.cleaned_data.get('subject')
+            name = form.cleaned_data.get('subject')
             #course = form.cleaned_data.get('course')
             staff = form.cleaned_data.get('staff')
             try:
@@ -232,6 +232,8 @@ def add_faculty_subject(request):
 
 def add_student_subject(request):
     form = StudentSubjectForm(request.POST or None)
+    #resultForm = EditResultForm()
+    #resultForm.fields['subject'].queryset = Subject.objects
     context = {
         'form': form,
         'page_title': 'Add Student Subject'
