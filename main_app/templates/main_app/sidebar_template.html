@@ -303,14 +303,7 @@
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        {% url 'add_subject' as add_subject %}
-                                        <a href="{{add_subject}}"
-                                            class="nav-link  {% if add_subject == request.path %} active {% endif %}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                Add Subject
-                                            </p>
+                                   
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -320,7 +313,7 @@
                                             class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                                Manage Subject
+                                                View Subject
             
                                             </p>
                                         </a>
@@ -339,14 +332,7 @@
                                 </a>
             
                                 <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        {% url 'add_student' as add_student%}
-                                        <a href="{{add_student}}" class="nav-link  {% if add_student == request.path %} active {% endif %}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                Add Student
-            
-                                            </p>
+                                   
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -357,7 +343,7 @@
                                             class="nav-link  {% if edit_student == request.path or manage_student == request.path %} active {% endif %}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                                Manage Student
+                                                View Student
             
                                             </p>
                                         </a>
