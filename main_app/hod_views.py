@@ -88,7 +88,7 @@ def admin_home(request):
 
 def add_staff(request):
     form = StaffForm(request.POST or None, request.FILES or None)
-    context = {'form': form, 'page_title': 'Add Staff'}
+    context = {'form': form, 'page_title': 'Add Faculty'}
     if request.method == 'POST':
         if form.is_valid():
             first_name = form.cleaned_data.get('first_name')
@@ -202,6 +202,60 @@ def add_subject(request):
             messages.error(request, "Fill Form Properly")
 
     return render(request, 'hod_template/add_subject_template.html', context)
+
+def add_faculty_subject(request):
+    form = FacultySubjectForm(request.POST or None)
+    context = {
+        'form': form,
+        'page_title': 'Add Faculty Subject'
+    }
+    if request.method == 'POST':
+        if form.is_valid():
+            #name = form.cleaned_data.get('subject')
+            #course = form.cleaned_data.get('course')
+            staff = form.cleaned_data.get('staff')
+            try:
+                #subject = Subject()
+                #subject.name = name
+                #subject.staff = staff
+                #subject.course = course
+                #subject.save()
+                messages.success(request, "Successfully Added")
+                return redirect(reverse('add_faculty_subject'))
+
+            except Exception as e:
+                messages.error(request, "Could Not Add " + str(e))
+        else:
+            messages.error(request, "Fill Form Properly")
+
+    return render(request, 'hod_template/add_faculty_subject_template.html', context)
+
+def add_student_subject(request):
+    form = StudentSubjectForm(request.POST or None)
+    context = {
+        'form': form,
+        'page_title': 'Add Student Subject'
+    }
+    if request.method == 'POST':
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            #course = form.cleaned_data.get('course')
+            staff = form.cleaned_data.get('staff')
+            try:
+                subject = Subject()
+                subject.name = name
+                subject.staff = staff
+                #subject.course = course
+                subject.save()
+                messages.success(request, "Successfully Added")
+                return redirect(reverse('add_student_subject'))
+
+            except Exception as e:
+                messages.error(request, "Could Not Add " + str(e))
+        else:
+            messages.error(request, "Fill Form Properly")
+
+    return render(request, 'hod_template/add_student_subject_template.html', context)
 
 
 def manage_staff(request):

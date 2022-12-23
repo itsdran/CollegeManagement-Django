@@ -100,6 +100,24 @@ class SubjectForm(FormSettings):
     class Meta:
         model = Subject
         fields = ['name', 'staff']
+        
+class FacultySubjectForm(FormSettings):
+    
+    def __init__(self, *args, **kwargs):
+        super(FacultySubjectForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Subject
+        fields = ['staff']#Add the subject selection here
+        
+class StudentSubjectForm(FormSettings):
+    
+    def __init__(self, *args, **kwargs):
+        super(StudentSubjectForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Subject
+        fields = ['staff']#Add the subject selection here
 
 
 class SessionForm(FormSettings):
