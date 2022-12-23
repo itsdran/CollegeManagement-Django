@@ -311,42 +311,6 @@
                                 </ul>
                             </li>
 
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-user-plus"></i>
-                                    <p>
-                                        Student
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-            
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        {% url 'add_student' as add_student%}
-                                        <a href="{{add_student}}" class="nav-link  {% if add_student == request.path %} active {% endif %}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                Add Student
-            
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        {% url 'manage_student' as manage_student %}
-                                        {% url 'edit_student' student_id as edit_student %}
-            
-                                        <a href="{{manage_student}}"
-                                            class="nav-link  {% if edit_student == request.path or manage_student == request.path %} active {% endif %}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                Manage Student
-            
-                                            </p>
-                                        </a>
-                                    </li>
-            
-                                </ul>
-                            </li>
 
                             <li class="nav-item">
                                 {% url 'staff_view_notification' as staff_view_notification %}
