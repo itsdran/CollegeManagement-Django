@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
@@ -37,22 +37,7 @@
                 </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-purple">
-                    <div class="inner">
-                        <h3>{{total_course}}</h3>
-
-                        <p>Total Course</p>
-                    </div>
-                    <div class="icon">
-                      <i class="nav-icon fas fa-th-list"></i>
-                    </div>
-                    <a href="{% url 'manage_course' %}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-4 col-6">
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
@@ -71,53 +56,11 @@
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
-            <div class="col-md-6">
-                <!-- LINE CHART -->
-                <div class="card card-dark">
-                  <div class="card-header">
-                    <h3 class="card-title">Staffs - Students Overview</h3>
-    
-                    <div class="card-tools">
-                      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <div class="chart">
-                      <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                    </div>
-                  </div></div>
-                  <!-- /.card-body -->
-                </div>
-                <div class="col-md-6">
-                    <div class="card card-dark">
-              <div class="card-header">
-                <h3 class="card-title">Attendance Per Subject</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="chart">
-                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
-                </div>
-            <!-- right col -->
-        </div>
-        <!-- /.row (main row) -->
-        <div class="row">
           <div class="col-lg-12">
-            <!-- BAR CHART -->
+            <!-- LINE CHART -->
             <div class="card card-dark">
               <div class="card-header">
-                <h3 class="card-title">Student's Attendance & Leave Overview</h3>
+                <h3 class="card-title">Staffs - Students Overview</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -127,61 +70,15 @@
               </div>
               <div class="card-body">
                 <div class="chart">
-                  <canvas id="barChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                  <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
-              </div>
+              </div></div>
               <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-          </div>
-
-
-          <div class="col-lg-6">
-            
-          </div>
-        
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-6">
-            <!-- PIE CHART -->
-            <div class="card card-dark">
-              <div class="card-header">
-                <h3 class="card-title">Total Students in Each Course</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+              <!-- /.card-body -->
+            </div>
                 </div>
               </div>
-              <div class="card-body">
-                <canvas id="pieChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-              <!-- /.card-body -->
-              </div>
-          </div>
-
-          <div class="col-lg-6">
-            <!-- PIE CHART -->
-            <div class="card card-dark">
-              <div class="card-header">
-                <h3 class="card-title">Total Students in Each Subject</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                </div>
-              </div>
-              <div class="card-body">
-                <canvas id="pieChart3" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-              </div>
-              <!-- /.card-body -->
-          </div>
-          </div>
-        </div>
     </div><!-- /.container-fluid -->
 </section>
 {% endblock content %}
@@ -232,32 +129,7 @@
       
       ]
     }
-        var barChartCanvas = $('#barChart').get(0).getContext('2d')
-        var temp0 = barChartData.datasets[0]
-        //var temp1 = areaChartData.datasets[1]
-        barChartData.datasets[0] = temp0
-       // barChartData.datasets[1] = temp0
-    
-    var stackedBarChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      scales: {
-        xAxes: [{
-          stacked: true,
-        }],
-        yAxes: [{
-          stacked: true
-        }]
-      }
-    }
-    
-        var barChart = new Chart(barChartCanvas, {
-          type: 'bar', 
-          data: barChartData,
-          options: stackedBarChartOptions
-        })
-       
-
+      
       // Total Students in Each Subject
       var student_count_list_in_subject = {{ student_count_list_in_subject }}
       var subject_list = {{ subject_list|safe }}
@@ -288,42 +160,6 @@
         options: pieOptions3      
       })   
 
-      
-
-         //- BAR CHART - Student Attendance & Leave Overview //
-      var student_attendance_present_list = {{ student_attendance_present_list }};
-      var student_attendance_leave_list = {{ student_attendance_leave_list }};
-      var student_name_list = {{ student_name_list|safe }};
-
-      var areaChartData2 = {
-        labels  : student_name_list,
-        datasets: [
-          {
-            label               : 'Absent/Leave',
-            backgroundColor     : '#b50a04',
-            borderColor         : '#b50a04',
-            pointRadius          : false,
-            pointColor          : '#3b8bba',
-            pointStrokeColor    : 'rgba(60,141,188,1)',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : student_attendance_leave_list 
-          },
-          {
-            label               : 'Attendance',
-            backgroundColor     : '#5a615c',
-            borderColor         : 'rgba(210, 214, 222, 1)',
-            pointRadius         : false,
-            pointColor          : 'rgba(210, 214, 222, 1)',
-            pointStrokeColor    : '#c1c7d1',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)',
-            data                : student_attendance_present_list
-          },
-        ]
-      }
-
-
       var barChartCanvas2 = $('#barChart2').get(0).getContext('2d')
       var barChartData2 = jQuery.extend(true, {}, areaChartData2)
       var temp02 = areaChartData2.datasets[0]
@@ -343,21 +179,6 @@
         options: barChartOptions2
       })
       
-
-      // Total Students in Each Course
-      //var donutChartCanvas = $('#pieChart2').get(0).getContext('2d')
-      var course_name_list = {{ course_name_list|safe }}
-      var student_count_list_in_course = {{ student_count_list_in_course }}
-      var pieData2 = {
-        labels: course_name_list,
-        datasets: [
-          {
-            data: student_count_list_in_course,
-            backgroundColor : ['#cc0404', '#00a65a', '#f39c12', '#00A4BD', '#045c8f', '#894e9c', '#9e4603', '#71bfb2'],
-          }
-        ]
-      }
-
       //-------------
       //- PIE CHART -
       //-------------

@@ -26,13 +26,13 @@ def staff_home(request):
         subject_list.append(subject.name)
         attendance_list.append(attendance_count)
     context = {
-        'page_title': 'Staff Panel - ' + str(staff.admin.last_name) + ' (' + str(staff.course) + ')',
-        'total_students': total_students,
-        'total_attendance': total_attendance,
-        'total_leave': total_leave,
+        'page_title': 'Faculty Panel - ' + str(staff.admin.last_name)# + ' (' + str(staff.course) + ')',
+        ,'total_students': total_students,
+        #'total_attendance': total_attendance,
+        #'total_leave': total_leave,
         'total_subject': total_subject,
         'subject_list': subject_list,
-        'attendance_list': attendance_list
+        #'attendance_list': attendance_list
     }
     return render(request, 'staff_template/home_content.html', context)
 
@@ -43,7 +43,7 @@ def staff_take_attendance(request):
     sessions = Session.objects.all()
     context = {
         'subjects': subjects,
-        'sessions': sessions,
+        #'sessions': sessions,
         'page_title': 'Take Attendance'
     }
 
