@@ -13,10 +13,10 @@
                         <h3 class="card-title">{{page_title}}</h3>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body" aling>
+                    <div class="card-body">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead class="thead-dark">
-                                <tr align="center">
+                                <tr>
                                     <th>#</th>
                                     <th>Full Name</th>
                                     <th>Email</th>
@@ -25,7 +25,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody align="center">
+                            <tbody>
                                 {% for staff in allStaff %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
@@ -36,8 +36,8 @@
                                         {% if staff.profile_pic == ""  %}
                                         No Image
                                         {% else %}
-                                        <p style="text-align:center;"><img class="img img-fluid mb-2" height="56" width="56"
-                                            src="{{staff.profile_pic}}" alt="" ></p>
+                                        <img class="img img-fluid mb-2" height="56" width="56"
+                                            src="{{staff.profile_pic}}" alt="">
                                         {% endif %}
                                     </td>
                                     <td>

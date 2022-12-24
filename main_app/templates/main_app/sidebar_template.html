@@ -87,7 +87,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-plus"></i>
                         <p>
-                            Staff
+                            Faculty
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -97,12 +97,22 @@
                       <a href="{{add_staff}}" class="nav-link {% if add_staff == request.path %} active {% endif %}">
                           <i class="far fa-circle nav-icon"></i>
                           <p>
-                            Add Staff
+                            Add Faculty
 
                           </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        {% url 'add_faculty_subject' as add_faculty_subject %}
+                        <a href="{{add_faculty_subject}}"
+                            class="nav-link  {% if add_faculty_subject == request.path %} active {% endif %}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Add Subject
 
+                            </p>
+                        </a>
+                    </li>
                 <li class="nav-item">
                     {% url 'manage_staff' as manage_staff %}
                     {% url 'edit_staff' staff_id as edit_staff %}
@@ -110,7 +120,7 @@
                         class="nav-link {% if manage_staff == request.path or request.path == edit_staff %} active {% endif %}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>
-                            Manage Staff
+                            Manage Faculty
 
                         </p>
                     </a>
@@ -135,6 +145,16 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>
                                     Add Student
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            {% url 'add_student_subject' as add_student_subject%}
+                            <a href="{{add_student_subject}}" class="nav-link  {% if add_student_subject == request.path %} active {% endif %}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>
+                                    Add Subject
 
                                 </p>
                             </a>
@@ -172,8 +192,7 @@
                             class="nav-link {% if admin_notify_staff == request.path %} active {% endif %}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>
-                                Notify Staff
-
+                                Notify Faculty
                             </p>
                         </a>
                     </li>
@@ -219,7 +238,7 @@
                             class="nav-link   {% if staff_feedback_message == request.path %} active {% endif %}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>
-                                Staff Feedback
+                                Faculty Feedback
 
                             </p>
                         </a>
@@ -291,7 +310,6 @@
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
                                                 Add Subject
-            
                                             </p>
                                         </a>
                                     </li>

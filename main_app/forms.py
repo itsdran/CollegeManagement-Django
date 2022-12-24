@@ -80,8 +80,7 @@ class StaffForm(CustomUserForm):
 
     class Meta(CustomUserForm.Meta):
         model = Staff
-        fields = CustomUserForm.Meta.fields + \
-            ['course' ]
+        fields = CustomUserForm.Meta.fields
 
 
 class CourseForm(FormSettings):
@@ -100,7 +99,25 @@ class SubjectForm(FormSettings):
 
     class Meta:
         model = Subject
-        fields = ['name', 'staff', 'course']
+        fields = ['name', 'staff']
+        
+class FacultySubjectForm(FormSettings):
+    
+    def __init__(self, *args, **kwargs):
+        super(FacultySubjectForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = FacultySubject
+        fields = ['staff', 'name']
+        
+class StudentSubjectForm(FormSettings):
+    
+    def __init__(self, *args, **kwargs):
+        super(StudentSubjectForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = StudentSubject
+        fields = ['first_name', 'name']
 
 
 class SessionForm(FormSettings):
