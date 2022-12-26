@@ -294,69 +294,26 @@
                                 </a>
                             </li>
                             
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
+                            <li class="nav-item">
+                                {% url 'manage_subject' as manage_subject %}
+                                <a href="{{manage_subject}}"
+                                    class="nav-link {% if manage_subject == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-book"></i>
                                     <p>
-                                        Subject
-                                        <i class="fas fa-angle-left right"></i>
+                                        View Subjects
                                     </p>
                                 </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        {% url 'add_subject' as add_subject %}
-                                        <a href="{{add_subject}}"
-                                            class="nav-link  {% if add_subject == request.path %} active {% endif %}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                Add Subject
-                                            </p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        {% url 'manage_subject' as manage_subject %}
-                                        {% url 'edit_subject' subject_id as edit_subject %}
-                                        <a href="{{manage_subject}}"
-                                            class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                View Subjects
-            
-                                            </p>
-                                        </a>
-                                    </li>
-            
-                                </ul>
                             </li>
-
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-user-plus"></i>
+                            <li class="nav-item">
+                                {% url 'manage_student' as manage_student %}
+                                <a href="{{manage_student}}"
+                                    class="nav-link {% if student_view_notification == request.path %} active {% endif %}">
+                                    <i class="nav-icon fas fa-users"></i>
                                     <p>
-                                        Student
-                                        <i class="fas fa-angle-left right"></i>
+                                        View Students
                                     </p>
                                 </a>
-            
-                                <ul class="nav nav-treeview">
-                                    
-                                    <li class="nav-item">
-                                        {% url 'manage_student' as manage_student %}
-                                        {% url 'edit_student' student_id as edit_student %}
-            
-                                        <a href="{{manage_student}}"
-                                            class="nav-link  {% if edit_student == request.path or manage_student == request.path %} active {% endif %}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                View Students
-            
-                                            </p>
-                                        </a>
-                                    </li>
-            
-                                </ul>
                             </li>
-
                             <li class="nav-item">
                                 {% url 'staff_view_notification' as staff_view_notification %}
                                 <a href="{{staff_view_notification}}"
@@ -431,28 +388,16 @@
                                         </li>
 
                                         <!--Star Subject-->
-                                        <li class="nav-item has-treeview">
-                                            <a href="#" class="nav-link">
+                                        <li class="nav-item">
+                                            {% url 'manage_subject' as manage_subject %}
+                                            <a href="{{manage_subject}}"
+                                                class="nav-link {% if manage_subject == request.path %} active {% endif %}">
                                                 <i class="nav-icon fas fa-book"></i>
                                                 <p>
-                                                    Subject
-                                                    <i class="fas fa-angle-left right"></i>
+                                                    View Subjects
                                                 </p>
                                             </a>
-                                            <ul class="nav nav-treeview">
-                                                <li class="nav-item">
-                                                    {% url 'view_subject' as view_subject %}
-                                                    {% url 'edit_subject' subject_id as edit_subject %}
-                                                    <a href="{{view_subject}}" class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
-                                                        <i class="far fa-circle nav-icon"></i>
-                                                        <p>
-                                                            View Subject
-
-                                                        </p>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        <!--End Subject-->
+                                        </li>
 
                                         <li class="nav-item">
                                             {% url 'student_view_notification' as student_view_notification %}
