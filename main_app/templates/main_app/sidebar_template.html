@@ -102,17 +102,7 @@
                           </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        {% url 'add_faculty_subject' as add_faculty_subject %}
-                        <a href="{{add_faculty_subject}}"
-                            class="nav-link  {% if add_faculty_subject == request.path %} active {% endif %}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>
-                                Add Subject
-
-                            </p>
-                        </a>
-                    </li>
+                    
                 <li class="nav-item">
                     {% url 'manage_staff' as manage_staff %}
                     {% url 'edit_staff' staff_id as edit_staff %}
