@@ -76,7 +76,7 @@ class Course(models.Model):
 
 class Student(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, null=True, blank=False)
+    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, null=True, blank=True)
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
@@ -84,7 +84,7 @@ class Student(models.Model):
 
 
 class Staff(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, null=True, blank=False)
+    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, null=True, blank=True)
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
