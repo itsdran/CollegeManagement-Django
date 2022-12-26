@@ -206,13 +206,13 @@ def student_view_result(request):
     }
     return render(request, "student_template/student_view_result.html", context)
 
-def student_manage_subject(request):
+def student_view_subjects(request):
     subjects = Subject.objects.all()
     context = {
         'subjects': subjects,
-        'page_title': 'Manage Subjects'
+        'page_title': 'View Subjects'
     }
-    return render(request, "student_template/student_manage_subject.html", context)
+    return render(request, "student_template/student_view_subjects.html", context)
 
 # main_app/student_views.py
 """def student_manage_subject():

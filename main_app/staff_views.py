@@ -51,25 +51,13 @@ def staff_take_attendance(request):
 
 
 @csrf_exempt
-def get_students(request):
-    subject_id = request.POST.get('subject')
-    session_id = request.POST.get('session')
-    try:
-        subject = get_object_or_404(Subject, id=subject_id)
-        session = get_object_or_404(Session, id=session_id)
-        students = Student.objects.filter(
-            course_id=subject.course.id, session=session)
-        student_data = []
-        for student in students:
-            data = {
-                    "id": student.id,
-                    "name": student.admin.last_name + " " + student.admin.first_name
-                    }
-            student_data.append(data)
-        return JsonResponse(json.dumps(student_data), content_type='application/json', safe=False)
-    except Exception as e:
-        return e
-
+def staff_view_students(request):
+    students = Student.objects.all()
+    context = {
+        'subjects': students,
+        'page_title': 'View Students'
+    }
+    return render(request, "staff_template/staff_view_students.html", context)
 
 @csrf_exempt
 def save_attendance(request):
