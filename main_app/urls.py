@@ -129,7 +129,10 @@ urlpatterns = [
          name='student_fcmtoken'),
     path("student/view/notification/", student_views.student_view_notification,
          name="student_view_notification"),
-    path('student/view/result/', student_views.student_view_result,
-         name='student_view_result'),
+    #path('student/view/result/', student_views.student_view_result,
+         #name='student_view_result'),
+     path('student/manage/subject/', student_views.student_manage_subject,
+         name='student_manage_subject'),
+         
 
 ]

@@ -303,7 +303,14 @@
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
-                                   
+                                    <li class="nav-item">
+                                        {% url 'add_subject' as add_subject %}
+                                        <a href="{{add_subject}}"
+                                            class="nav-link  {% if add_subject == request.path %} active {% endif %}">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>
+                                                Add Subject
+                                            </p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -313,7 +320,7 @@
                                             class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                                View Subject
+                                                View Subjects
             
                                             </p>
                                         </a>
@@ -332,9 +339,7 @@
                                 </a>
             
                                 <ul class="nav nav-treeview">
-                                   
-                                        </a>
-                                    </li>
+                                    
                                     <li class="nav-item">
                                         {% url 'manage_student' as manage_student %}
                                         {% url 'edit_student' student_id as edit_student %}
@@ -343,7 +348,7 @@
                                             class="nav-link  {% if edit_student == request.path or manage_student == request.path %} active {% endif %}">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>
-                                                View Student
+                                                View Students
             
                                             </p>
                                         </a>
@@ -376,10 +381,10 @@
                                 </a>
                             </li>
                             
-                            {% else %}
+                            
                             <!-- Brand Logo -->
-                            <a href="{% url 'admin_home' %}" class="brand-link">
-
+                            {% elif request.user.user_type == '3' %}
+                            <a href="{% url 'student_home' %}" class="brand-link">
                                 <img src="{% static 'dist/img/AdminLTELogo.png' %} " alt="AdminLTE Logo"
                                     class="brand-image img-circle elevation-3" style="opacity: .8">
                                 <span class="brand-text font-weight-light">Student Panel</span>
@@ -436,24 +441,12 @@
                                             </a>
                                             <ul class="nav nav-treeview">
                                                 <li class="nav-item">
-                                                    {% url 'add_subject' as add_subject %}
-                                                    <a href="{{add_subject}}"
-                                                        class="nav-link  {% if add_subject == request.path %} active {% endif %}">
-                                                        <i class="far fa-circle nav-icon"></i>
-                                                        <p>
-                                                            Add Subject
-
-                                                        </p>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    {% url 'manage_subject' as manage_subject %}
+                                                    {% url 'view_subject' as view_subject %}
                                                     {% url 'edit_subject' subject_id as edit_subject %}
-                                                    <a href="{{manage_subject}}"
-                                                        class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
+                                                    <a href="{{view_subject}}" class="nav-link  {% if edit_subject == request.path or manage_subject == request.path %} active {% endif %}">
                                                         <i class="far fa-circle nav-icon"></i>
                                                         <p>
-                                                            Manage Subject
+                                                            View Subject
 
                                                         </p>
                                                     </a>
