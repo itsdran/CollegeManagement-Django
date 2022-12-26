@@ -93,11 +93,13 @@ urlpatterns = [
     path("staff/feedback/", staff_views.staff_feedback, name='staff_feedback'),
     path("staff/view/profile/", staff_views.staff_view_profile,
          name='staff_view_profile'),
+    path("staff/view/students/", staff_views.staff_view_students,
+         name='staff_view_students'),
     path("staff/attendance/take/", staff_views.staff_take_attendance,
          name='staff_take_attendance'),
     path("staff/attendance/update/", staff_views.staff_update_attendance,
          name='staff_update_attendance'),
-    path("staff/get_students/", staff_views.get_students, name='get_students'),
+    #path("staff/get_students/", staff_views.get_students, name='get_students'),
     path("staff/attendance/fetch/", staff_views.get_student_attendance,
          name='get_student_attendance'),
     path("staff/attendance/save/",
@@ -131,8 +133,8 @@ urlpatterns = [
          name="student_view_notification"),
     #path('student/view/result/', student_views.student_view_result,
          #name='student_view_result'),
-     path('student/manage/subject/', student_views.student_manage_subject,
-         name='student_manage_subject'),
+     path('student/view/subjects/', student_views.student_view_subjects,
+         name='student_view_subjects'),
          
 
 ]

@@ -88,7 +88,7 @@ def admin_home(request):
 
 def add_staff(request):
     form = StaffForm(request.POST or None, request.FILES or None)
-    context = {'form': form, 'page_title': 'Add Faculty'}
+    context = {'form': form, 'page_title': 'Add Staff'}
     if request.method == 'POST':
         if form.is_valid():
             first_name = form.cleaned_data.get('first_name')
@@ -232,23 +232,26 @@ def add_faculty_subject(request):
 
 def add_student_subject(request):
     form = StudentSubjectForm(request.POST or None)
-    #resultForm = EditResultForm()
-    #resultForm.fields['subject'].queryset = Subject.objects
+    resultForm = StudentSubjectForm()
+    #resultForm.fields['first_name', 'staff'].queryset = StudentSubjects
     context = {
         'form': form,
         'page_title': 'Add Student Subject'
     }
     if request.method == 'POST':
         if form.is_valid():
+            student_id = request.POST.get('student')
+            staff = request.POST.get('staff')
+            subject_ID = request.POST.get('name')
             name = form.cleaned_data.get('name')
-            #course = form.cleaned_data.get('course')
-            staff = form.cleaned_data.get('staff')
+            first_name = form.cleaned_data.get('first_name')
             try:
-                subject = Subject()
-                subject.name = name
+                subject = StudentSubjects()
+                subject.student_ID = student_id
                 subject.staff = staff
-                #subject.course = course
-                subject.save()
+                subject.subject_ID = subject_ID
+                subject.name = name
+                StudentSubjects.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_student_subject'))
 

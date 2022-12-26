@@ -285,18 +285,8 @@
                             </li>
                             
                             <li class="nav-item">
-                                {% url 'manage_subject' as manage_subject %}
-                                <a href="{{manage_subject}}"
-                                    class="nav-link {% if manage_subject == request.path %} active {% endif %}">
-                                    <i class="nav-icon fas fa-book"></i>
-                                    <p>
-                                        View Subjects
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                {% url 'manage_student' as manage_student %}
-                                <a href="{{manage_student}}"
+                                {% url 'staff_view_students' as staff_view_students %}
+                                <a href="{{staff_view_students}}"
                                     class="nav-link {% if student_view_notification == request.path %} active {% endif %}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
@@ -379,9 +369,9 @@
 
                                         <!--Star Subject-->
                                         <li class="nav-item">
-                                            {% url 'manage_subject' as manage_subject %}
-                                            <a href="{{manage_subject}}"
-                                                class="nav-link {% if manage_subject == request.path %} active {% endif %}">
+                                            {% url 'student_view_subjects' as student_view_subjects %}
+                                            <a href="{{student_view_subjects}}"
+                                                class="nav-link {% if student_view_subjects == request.path %} active {% endif %}">
                                                 <i class="nav-icon fas fa-book"></i>
                                                 <p>
                                                     View Subjects
