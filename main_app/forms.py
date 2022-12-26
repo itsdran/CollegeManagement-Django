@@ -116,7 +116,7 @@ class StudentSubjectForm(FormSettings):
         super(StudentSubjectForm, self).__init__(*args, **kwargs)
 
     class Meta:
-        model = StudentSubject
+        model = StudentSubjects
         fields = ['first_name', 'name']
 
 
