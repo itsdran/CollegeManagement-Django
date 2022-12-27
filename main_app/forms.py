@@ -61,8 +61,7 @@ class StudentForm(CustomUserForm):
 
     class Meta(CustomUserForm.Meta):
         model = Student
-        fields = CustomUserForm.Meta.fields + \
-            ['course', 'session']
+        fields = CustomUserForm.Meta.fields
 
 
 class AdminForm(CustomUserForm):
@@ -96,29 +95,15 @@ class SubjectForm(FormSettings):
 
     def __init__(self, *args, **kwargs):
         super(SubjectForm, self).__init__(*args, **kwargs)
+        self.fields['course'].required = False
+        self.fields['course'].initial = '1'
+        #self.fields['course'].HiddenInput()
+        
 
     class Meta:
         model = Subject
-        fields = ['name', 'staff']
-        
-class FacultySubjectForm(FormSettings):
-    
-    def __init__(self, *args, **kwargs):
-        super(FacultySubjectForm, self).__init__(*args, **kwargs)
-
-    class Meta:
-        model = FacultySubject
-        fields = ['staff', 'name']
-        
-class StudentSubjectForm(FormSettings):
-    
-    def __init__(self, *args, **kwargs):
-        super(StudentSubjectForm, self).__init__(*args, **kwargs)
-
-    class Meta:
-        model = StudentSubjects
-        fields = ['first_name', 'name']
-
+        fields = ['name', 'staff', 'course']
+        widgets = {'course': forms.HiddenInput()}
 
 class SessionForm(FormSettings):
     def __init__(self, *args, **kwargs):

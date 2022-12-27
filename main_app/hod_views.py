@@ -97,7 +97,7 @@ def add_staff(request):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password')
-            #course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             passport = request.FILES.get('profile_pic')
             fs = FileSystemStorage()
             filename = fs.save(passport.name, passport)
@@ -107,7 +107,7 @@ def add_staff(request):
                     email=email, password=password, user_type=2, first_name=first_name, last_name=last_name, profile_pic=passport_url)
                 user.gender = gender
                 user.address = address
-                #user.staff.course = course
+                user.staff.course = course
                 user.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_staff'))
@@ -131,8 +131,8 @@ def add_student(request):
             email = student_form.cleaned_data.get('email')
             gender = student_form.cleaned_data.get('gender')
             password = student_form.cleaned_data.get('password')
-            #course = student_form.cleaned_data.get('course')
-            #session = student_form.cleaned_data.get('session')
+            course = student_form.cleaned_data.get('course') or 'BSIT'
+            session = student_form.cleaned_data.get('session')
             passport = request.FILES['profile_pic']
             fs = FileSystemStorage()
             filename = fs.save(passport.name, passport)
@@ -142,8 +142,8 @@ def add_student(request):
                     email=email, password=password, user_type=3, first_name=first_name, last_name=last_name, profile_pic=passport_url)
                 user.gender = gender
                 user.address = address
-                #.student.session = session
-                #user.student.course = course
+                Student.session = session
+                user.student.course = course
                 user.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_student'))
@@ -185,13 +185,13 @@ def add_subject(request):
     if request.method == 'POST':
         if form.is_valid():
             name = form.cleaned_data.get('name')
-            #course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             staff = form.cleaned_data.get('staff')
             try:
                 subject = Subject()
                 subject.name = name
                 subject.staff = staff
-                #subject.course = course
+                subject.course = course
                 subject.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_subject'))
@@ -202,65 +202,6 @@ def add_subject(request):
             messages.error(request, "Fill Form Properly")
 
     return render(request, 'hod_template/add_subject_template.html', context)
-
-def add_faculty_subject(request):
-    form = FacultySubjectForm(request.POST or None)
-    context = {
-        'form': form,
-        'page_title': 'Add Faculty Subject'
-    }
-    if request.method == 'POST':
-        if form.is_valid():
-            name = form.cleaned_data.get('subject')
-            #course = form.cleaned_data.get('course')
-            staff = form.cleaned_data.get('staff')
-            try:
-                #subject = Subject()
-                #subject.name = name
-                #subject.staff = staff
-                #subject.course = course
-                #subject.save()
-                messages.success(request, "Successfully Added")
-                return redirect(reverse('add_faculty_subject'))
-
-            except Exception as e:
-                messages.error(request, "Could Not Add " + str(e))
-        else:
-            messages.error(request, "Fill Form Properly")
-
-    return render(request, 'hod_template/add_faculty_subject_template.html', context)
-
-def add_student_subject(request):
-    form = StudentSubjectForm(request.POST or None)
-    resultForm = StudentSubjectForm()
-    #resultForm.fields['first_name', 'staff'].queryset = StudentSubjects
-    context = {
-        'form': form,
-        'page_title': 'Add Student Subject'
-    }
-    if request.method == 'POST':
-        if form.is_valid():
-            student_id = request.POST.get('student')
-            staff = request.POST.get('staff')
-            subject_ID = request.POST.get('name')
-            name = form.cleaned_data.get('name')
-            first_name = form.cleaned_data.get('first_name')
-            try:
-                subject = StudentSubjects()
-                subject.student_ID = student_id
-                subject.staff = staff
-                subject.subject_ID = subject_ID
-                subject.name = name
-                StudentSubjects.save()
-                messages.success(request, "Successfully Added")
-                return redirect(reverse('add_student_subject'))
-
-            except Exception as e:
-                messages.error(request, "Could Not Add " + str(e))
-        else:
-            messages.error(request, "Fill Form Properly")
-
-    return render(request, 'hod_template/add_student_subject_template.html', context)
 
 
 def manage_staff(request):
@@ -316,7 +257,7 @@ def edit_staff(request, staff_id):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
-            #course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             passport = request.FILES.get('profile_pic') or None
             try:
                 user = CustomUser.objects.get(id=staff.admin.id)
@@ -333,7 +274,7 @@ def edit_staff(request, staff_id):
                 user.last_name = last_name
                 user.gender = gender
                 user.address = address
-                #staff.course = course
+                staff.course = course
                 user.save()
                 staff.save()
                 messages.success(request, "Successfully Updated")
@@ -343,8 +284,8 @@ def edit_staff(request, staff_id):
         else:
             messages.error(request, "Please fil form properly")
     else:
-        #user = CustomUser.objects.get(id=staff_id)
-        #staff = Staff.objects.get(id=user.id)
+        user = CustomUser.objects.get(id=staff_id)
+        staff = Staff.objects.get(id=user.id)
         return render(request, "hod_template/edit_staff_template.html", context)
 
 
@@ -365,7 +306,7 @@ def edit_student(request, student_id):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
-            #course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             session = form.cleaned_data.get('session')
             passport = request.FILES.get('profile_pic') or None
             try:
@@ -426,19 +367,19 @@ def edit_subject(request, subject_id):
     form = SubjectForm(request.POST or None, instance=instance)
     context = {
         'form': form,
-        'subject_id': subject_id,
+        'subject': id,
         'page_title': 'Edit Subject'
     }
     if request.method == 'POST':
         if form.is_valid():
             name = form.cleaned_data.get('name')
-            #course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             staff = form.cleaned_data.get('staff')
             try:
                 subject = Subject.objects.get(id=subject_id)
                 subject.name = name
                 subject.staff = staff
-                #subject.course = course
+                subject.course = course
                 subject.save()
                 messages.success(request, "Successfully Updated")
                 return redirect(reverse('edit_subject', args=[subject_id]))
@@ -742,7 +683,7 @@ def send_staff_notification(request):
 
 
 def delete_staff(request, staff_id):
-    staff = get_object_or_404(CustomUser, staff__id=staff_id)
+    staff = get_object_or_404(CustomUser, id=staff_id)
     staff.delete()
     messages.success(request, "Staff deleted successfully!")
     return redirect(reverse('manage_staff'))
