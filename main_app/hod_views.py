@@ -97,7 +97,7 @@ def add_staff(request):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password')
-            course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             passport = request.FILES.get('profile_pic')
             fs = FileSystemStorage()
             filename = fs.save(passport.name, passport)
@@ -131,8 +131,8 @@ def add_student(request):
             email = student_form.cleaned_data.get('email')
             gender = student_form.cleaned_data.get('gender')
             password = student_form.cleaned_data.get('password')
-            #course = student_form.cleaned_data.get('course')
-            #session = student_form.cleaned_data.get('session')
+            course = student_form.cleaned_data.get('course') or 'BSIT'
+            session = student_form.cleaned_data.get('session')
             passport = request.FILES['profile_pic']
             fs = FileSystemStorage()
             filename = fs.save(passport.name, passport)
@@ -142,8 +142,8 @@ def add_student(request):
                     email=email, password=password, user_type=3, first_name=first_name, last_name=last_name, profile_pic=passport_url)
                 user.gender = gender
                 user.address = address
-                #.student.session = session
-                #user.student.course = course
+                Student.session = session
+                user.student.course = course
                 user.save()
                 messages.success(request, "Successfully Added")
                 return redirect(reverse('add_student'))
@@ -185,7 +185,7 @@ def add_subject(request):
     if request.method == 'POST':
         if form.is_valid():
             name = form.cleaned_data.get('name')
-            course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             staff = form.cleaned_data.get('staff')
             try:
                 subject = Subject()
@@ -257,7 +257,7 @@ def edit_staff(request, staff_id):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
-            course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             passport = request.FILES.get('profile_pic') or None
             try:
                 user = CustomUser.objects.get(id=staff.admin.id)
@@ -306,7 +306,7 @@ def edit_student(request, student_id):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
-            #course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             session = form.cleaned_data.get('session')
             passport = request.FILES.get('profile_pic') or None
             try:
@@ -373,13 +373,13 @@ def edit_subject(request, subject_id):
     if request.method == 'POST':
         if form.is_valid():
             name = form.cleaned_data.get('name')
-            #course = form.cleaned_data.get('course')
+            course = form.cleaned_data.get('course') or 'BSIT'
             staff = form.cleaned_data.get('staff')
             try:
                 subject = Subject.objects.get(id=subject_id)
                 subject.name = name
                 subject.staff = staff
-                #subject.course = course
+                subject.course = course
                 subject.save()
                 messages.success(request, "Successfully Updated")
                 return redirect(reverse('edit_subject', args=[subject_id]))
