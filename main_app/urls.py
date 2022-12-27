@@ -108,6 +108,8 @@ urlpatterns = [
     path("staff/fcmtoken/", staff_views.staff_fcmtoken, name='staff_fcmtoken'),
     path("staff/view/notification/", staff_views.staff_view_notification,
          name="staff_view_notification"),
+    path("staff/manage/students/", staff_views.staff_manage_student,
+         name="staff_manage_student"),
     path("staff/result/add/", staff_views.staff_add_result, name='staff_add_result'),
     path("staff/result/edit/", EditResultView.as_view(),
          name='edit_student_result'),

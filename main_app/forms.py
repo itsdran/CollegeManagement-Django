@@ -52,12 +52,13 @@ class CustomUserForm(FormSettings):
 
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'email', 'gender',  'password','profile_pic', 'address' ]
+        fields = ['first_name', 'last_name', 'email', 'gender', 'password','profile_pic', 'address']
 
 
 class StudentForm(CustomUserForm):
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
+        
 
     class Meta(CustomUserForm.Meta):
         model = Student
@@ -76,6 +77,7 @@ class AdminForm(CustomUserForm):
 class StaffForm(CustomUserForm):
     def __init__(self, *args, **kwargs):
         super(StaffForm, self).__init__(*args, **kwargs)
+        
 
     class Meta(CustomUserForm.Meta):
         model = Staff

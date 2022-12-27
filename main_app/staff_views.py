@@ -26,8 +26,8 @@ def staff_home(request):
         subject_list.append(subject.name)
         attendance_list.append(attendance_count)
     context = {
-        'page_title': 'Faculty Panel - ' + str(staff.admin.last_name)# + ' (' + str(staff.course) + ')',
-        ,'total_students': total_students,
+        'page_title': 'Staff Panel - ' + str(staff.admin.last_name) + ' (' + str(staff.course) + ')',
+        #,'total_students': total_students,
         #'total_attendance': total_attendance,
         #'total_leave': total_leave,
         'total_subject': total_subject,
@@ -240,6 +240,13 @@ def staff_view_notification(request):
     }
     return render(request, "staff_template/staff_view_notification.html", context)
 
+def staff_manage_student(request):
+    students = CustomUser.objects.filter(user_type=3)#faculty__id=staff_id)
+    context = {
+        'students': students,
+        'page_title': 'View Students'
+    }
+    return render(request, "staff_template/staff_manage_student.html", context)
 
 def staff_add_result(request):
     staff = get_object_or_404(Staff, admin=request.user)
