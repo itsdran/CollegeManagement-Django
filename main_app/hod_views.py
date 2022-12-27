@@ -97,7 +97,7 @@ def add_staff(request):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password')
-            course = form.cleaned_data.get('course') or 'BSIT'
+            course = form.cleaned_data.get('course') or None
             passport = request.FILES.get('profile_pic')
             fs = FileSystemStorage()
             filename = fs.save(passport.name, passport)
@@ -123,6 +123,7 @@ def add_staff(request):
 def add_student(request):
     student_form = StudentForm(request.POST or None, request.FILES or None)
     context = {'form': student_form, 'page_title': 'Add Student'}
+    course = Student(initial={'course': 'BSIT'})
     if request.method == 'POST':
         if student_form.is_valid():
             first_name = student_form.cleaned_data.get('first_name')
@@ -131,7 +132,7 @@ def add_student(request):
             email = student_form.cleaned_data.get('email')
             gender = student_form.cleaned_data.get('gender')
             password = student_form.cleaned_data.get('password')
-            course = student_form.cleaned_data.get('course') or 'BSIT'
+            course = student_form.cleaned_data.get('course') or None
             session = student_form.cleaned_data.get('session')
             passport = request.FILES['profile_pic']
             fs = FileSystemStorage()
@@ -178,6 +179,7 @@ def add_course(request):
 
 def add_subject(request):
     form = SubjectForm(request.POST or None)
+    course = Subject(initial={'course': 'BSIT'})
     context = {
         'form': form,
         'page_title': 'Add Subject'
@@ -241,7 +243,7 @@ def manage_subject(request):
 
 
 def edit_staff(request, staff_id):
-    staff = get_object_or_404(Staff, id=staff_id)
+    staff = get_object_or_404(Staff, admin_id=staff_id)
     form = StaffForm(request.POST or None, instance=staff)
     context = {
         'form': form,
@@ -285,7 +287,7 @@ def edit_staff(request, staff_id):
             messages.error(request, "Please fil form properly")
     else:
         user = CustomUser.objects.get(id=staff_id)
-        staff = Staff.objects.get(id=user.id)
+        staff = Staff.objects.get(admin_id=user.id)
         return render(request, "hod_template/edit_staff_template.html", context)
 
 
@@ -683,8 +685,10 @@ def send_staff_notification(request):
 
 
 def delete_staff(request, staff_id):
-    staff = get_object_or_404(CustomUser, id=staff_id)
+    staff = get_object_or_404(Staff, admin_id=staff_id)
     staff.delete()
+    user= get_object_or_404(CustomUser, id=staff_id)
+    user.delete()
     messages.success(request, "Staff deleted successfully!")
     return redirect(reverse('manage_staff'))
 
