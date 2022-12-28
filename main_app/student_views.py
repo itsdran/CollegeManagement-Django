@@ -208,7 +208,7 @@ def student_view_result(request):
 
 def student_view_subjects(request):
     student = get_object_or_404(Student, admin=request.user)
-    subjects = StudentSubject.objects.filter(id=student.id)
+    subjects = StudentSubject.objects.filter(student_id=student.id)
     context = {
         'studentsubject': subjects,
         'page_title': 'View Subjects'
