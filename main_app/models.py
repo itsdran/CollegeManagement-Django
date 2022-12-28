@@ -101,7 +101,7 @@ class Subject(models.Model):
         return self.name    
     
 class StudentSubject(models.Model):
-    student = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    student = models.ForeignKey(Student,on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
     staff = models.ForeignKey(Staff,on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, null=False, blank=False)
