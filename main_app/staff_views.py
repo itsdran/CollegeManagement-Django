@@ -13,7 +13,7 @@ from .models import *
 
 def staff_home(request):
     staff = get_object_or_404(Staff, admin=request.user)
-    total_students = Student.objects.filter(course=staff.course).count()
+    total_students = StudentSubject.objects.filter(staff_id=staff.id).count()
     total_leave = LeaveReportStaff.objects.filter(staff=staff).count()
     subjects = Subject.objects.filter(staff=staff)
     total_subject = subjects.count()
@@ -50,11 +50,14 @@ def staff_take_attendance(request):
     return render(request, 'staff_template/staff_take_attendance.html', context)
 
 
-@csrf_exempt
 def staff_view_students(request):
-    students = Student.objects.all()
+    staff = get_object_or_404(Staff, admin=request.user)
+    students = StudentSubject.objects.filter(staff_id=staff.id)
+    allStudents = CustomUser.objects.filter(user_type=3)
+    #student_info = Student.objects.all().count()
     context = {
-        'subjects': students,
+        'staffstudents': students,
+        #'allStudents': allStudents,
         'page_title': 'View Students'
     }
     return render(request, "staff_template/staff_view_students.html", context)
@@ -241,7 +244,8 @@ def staff_view_notification(request):
     return render(request, "staff_template/staff_view_notification.html", context)
 
 def staff_manage_student(request):
-    students = CustomUser.objects.filter(user_type=3)#faculty__id=staff_id)
+    students = CustomUser.objects.filter(user_type=3)
+    
     context = {
         'students': students,
         'page_title': 'View Students'
