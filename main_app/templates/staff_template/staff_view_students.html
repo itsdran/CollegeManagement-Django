@@ -26,13 +26,15 @@
                         <div class="form-group table">
               <table class="table table-bordered">
                   <tr>
-                      <th>#</th>
+                      <th>Student ID</th>
                       <th>Name</th>
+                      <th>Subject</th>
                   </tr>
-                  {% for students in  students %}
+                  {% for staffstudents in  staffstudents %}
                     <tr>
-                        <td>{{forloop.name}}</td>
-                        <td>{{forloop.students}}</td>
+                        <td>{{staffstudents.student_id}}</td>
+                        <td>{{staffstudents.student}}</td>
+                        <td>{{staffstudents.subject}}</td>
                     </tr>
                   {% endfor %}
               </table>

@@ -5,21 +5,22 @@
 
 <section class="content">
     <div class="card card-dark">
-        <div class="card-header"><h3 class="card-title">Class Schedule</h3>
+        <div class="card-header"><h3 class="card-title">Student Subjects</h3>
         </div>
     <div class="table p-2">
 
         <table class="table table-bordered">
             <tr>
-                <th>#</th>
+                <th>Subject ID</th>
                 <th>Subject</th>
                 <th>Staff</th>
             </tr>
-            {% for subjectlist in subjectlist %}
+            {% for studentsubject in studentsubject %}
             <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{subjectlist.subjectlist}}</td>
-                
+                <!--<td>{{forloop.counter}}</td>-->
+                <td>{{studentsubject.id}}</td>
+                <td>{{studentsubject.subject}}</td>
+                <td>{{studentsubject.staff}}</td>
                 </tr>
                 
                 {% endfor %}
