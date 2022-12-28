@@ -123,7 +123,7 @@ def add_staff(request):
 def add_student(request):
     student_form = StudentForm(request.POST or None, request.FILES or None)
     context = {'form': student_form, 'page_title': 'Add Student'}
-    course = Student(initial={'course': 'BSIT'})
+    #course = Student(initial={'course': 'BSIT'})
     if request.method == 'POST':
         if student_form.is_valid():
             first_name = student_form.cleaned_data.get('first_name')
@@ -179,7 +179,7 @@ def add_course(request):
 
 def add_subject(request):
     form = SubjectForm(request.POST or None)
-    course = Subject(initial={'course': 'BSIT'})
+    #course = Subject(initial={'course': 'BSIT'})
     context = {
         'form': form,
         'page_title': 'Add Subject'
@@ -204,6 +204,36 @@ def add_subject(request):
             messages.error(request, "Fill Form Properly")
 
     return render(request, 'hod_template/add_subject_template.html', context)
+
+def add_student_subject(request):
+    form = StudentSubjectForm(request.POST or None)
+    context = {
+        'form': form,
+        'page_title': 'Add Student Subject'
+    }
+    if request.method == 'POST':
+        if form.is_valid():
+            student = form.cleaned_data.get('student')
+            subject = form.cleaned_data.get('subject')
+            #staff   = get_object_or_404(CustomUser, id=subject.staff_id)
+            staff = get_object_or_404(Staff, id=subject.staff_id)
+            course  = get_object_or_404(Course, id=subject.course_id)
+            try:
+                student_subject = StudentSubject()
+                student_subject.student = student
+                student_subject.course = course
+                student_subject.subject = subject
+                student_subject.staff = staff
+                student_subject.save()
+                messages.success(request, "Successfully Added")
+                return redirect(reverse('add_student_subject'))
+
+            except Exception as e:
+                messages.error(request, "Could Not Add " + str(e))
+        else:
+            messages.error(request, "Fill Form Properly")
+
+    return render(request, 'hod_template/add_student_subject_template.html', context)
 
 
 def manage_staff(request):

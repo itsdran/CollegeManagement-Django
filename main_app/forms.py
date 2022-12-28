@@ -106,6 +106,20 @@ class SubjectForm(FormSettings):
         model = Subject
         fields = ['name', 'staff', 'course']
         widgets = {'course': forms.HiddenInput()}
+        
+class StudentSubjectForm(FormSettings):
+    
+    def __init__(self, *args, **kwargs):
+        super(StudentSubjectForm, self).__init__(*args, **kwargs)
+        #self.fields['course'].required = False
+        #self.fields['course'].initial = '1'
+        #self.fields['course'].HiddenInput()
+        
+
+    class Meta:
+        model = StudentSubject
+        fields = ['student', 'subject']
+        #widgets = {'course': forms.HiddenInput()}
 
 class SessionForm(FormSettings):
     def __init__(self, *args, **kwargs):

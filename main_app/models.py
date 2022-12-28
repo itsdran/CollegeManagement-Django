@@ -99,6 +99,16 @@ class Subject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.name    
+    
+class StudentSubject(models.Model):
+    student = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject,on_delete=models.CASCADE)
+    staff = models.ForeignKey(Staff,on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, null=False, blank=False)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name
 
 class Attendance(models.Model):
     session = models.ForeignKey(Session, on_delete=models.DO_NOTHING)
