@@ -756,11 +756,11 @@ def delete_subject(request, subject_id):
     messages.success(request, "Subject deleted successfully!")
     return redirect(reverse('manage_subject'))
 
-def delete_student_subject(request, student_subject_id):
-    subject = get_object_or_404(StudentSubject, id=student_subject_id)
+def delete_student_subject(request, id):
+    subject = get_object_or_404(StudentSubject, id=id)
     subject.delete()
     messages.success(request, "Subject deleted successfully!")
-    return redirect(reverse('manage_student_subjects', id=student_subject_id))
+    return redirect(reverse('manage_student'))
 
 
 def delete_session(request, session_id):
