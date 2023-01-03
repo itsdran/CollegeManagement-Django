@@ -257,7 +257,10 @@ def edit_staff(request, staff_id):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
+<<<<<<< Updated upstream
             #course = form.cleaned_data.get('course')
+=======
+>>>>>>> Stashed changes
             passport = request.FILES.get('profile_pic') or None
             try:
                 user = CustomUser.objects.get(id=staff.admin.id)
@@ -274,7 +277,10 @@ def edit_staff(request, staff_id):
                 user.last_name = last_name
                 user.gender = gender
                 user.address = address
+<<<<<<< Updated upstream
                 #staff.course = course
+=======
+>>>>>>> Stashed changes
                 user.save()
                 staff.save()
                 messages.success(request, "Successfully Updated")
@@ -287,7 +293,6 @@ def edit_staff(request, staff_id):
         #user = CustomUser.objects.get(id=staff_id)
         #staff = Staff.objects.get(id=user.id)
         return render(request, "hod_template/edit_staff_template.html", context)
-
 
 def edit_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
