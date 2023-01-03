@@ -289,7 +289,7 @@ def edit_staff(request, staff_id):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
-            course = form.cleaned_data.get('course') or 'BSIT'
+            #course = form.cleaned_data.get('course') or 'BSIT'
             passport = request.FILES.get('profile_pic') or None
             try:
                 user = CustomUser.objects.get(id=staff.admin.id)
@@ -306,7 +306,7 @@ def edit_staff(request, staff_id):
                 user.last_name = last_name
                 user.gender = gender
                 user.address = address
-                staff.course = course
+                #staff.course = course
                 user.save()
                 staff.save()
                 messages.success(request, "Successfully Updated")
