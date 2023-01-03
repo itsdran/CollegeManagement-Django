@@ -13,7 +13,7 @@ from .models import *
 
 def staff_home(request):
     staff = get_object_or_404(Staff, admin=request.user)
-    total_students = Student.objects.filter(course=staff.course).count()
+    total_students = StudentSubject.objects.filter(staff_id=staff.id).count()
     total_leave = LeaveReportStaff.objects.filter(staff=staff).count()
     subjects = Subject.objects.filter(staff=staff)
     total_subject = subjects.count()
@@ -26,7 +26,7 @@ def staff_home(request):
         subject_list.append(subject.name)
         attendance_list.append(attendance_count)
     context = {
-        'page_title': 'Faculty Panel - ' + str(staff.admin.last_name)# + ' (' + str(staff.course) + ')',
+        'page_title': 'Staff Panel'# + str(staff.admin.last_name) + ' (' + str(staff.course) + ')',
         ,'total_students': total_students,
         #'total_attendance': total_attendance,
         #'total_leave': total_leave,
@@ -50,26 +50,17 @@ def staff_take_attendance(request):
     return render(request, 'staff_template/staff_take_attendance.html', context)
 
 
-@csrf_exempt
-def get_students(request):
-    subject_id = request.POST.get('subject')
-    session_id = request.POST.get('session')
-    try:
-        subject = get_object_or_404(Subject, id=subject_id)
-        session = get_object_or_404(Session, id=session_id)
-        students = Student.objects.filter(
-            course_id=subject.course.id, session=session)
-        student_data = []
-        for student in students:
-            data = {
-                    "id": student.id,
-                    "name": student.admin.last_name + " " + student.admin.first_name
-                    }
-            student_data.append(data)
-        return JsonResponse(json.dumps(student_data), content_type='application/json', safe=False)
-    except Exception as e:
-        return e
-
+def staff_view_students(request):
+    staff = get_object_or_404(Staff, admin=request.user)
+    students = StudentSubject.objects.filter(staff_id=staff.id)
+    allStudents = CustomUser.objects.filter(user_type=3)
+    #student_info = Student.objects.all().count()
+    context = {
+        'staffstudents': students,
+        #'allStudents': allStudents,
+        'page_title': 'View Students'
+    }
+    return render(request, "staff_template/staff_view_students.html", context)
 
 @csrf_exempt
 def save_attendance(request):
@@ -252,6 +243,14 @@ def staff_view_notification(request):
     }
     return render(request, "staff_template/staff_view_notification.html", context)
 
+def staff_manage_student(request):
+    students = CustomUser.objects.filter(user_type=3)
+    
+    context = {
+        'students': students,
+        'page_title': 'View Students'
+    }
+    return render(request, "staff_template/staff_manage_student.html", context)
 
 def staff_add_result(request):
     staff = get_object_or_404(Staff, admin=request.user)

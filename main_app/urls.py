@@ -58,7 +58,9 @@ urlpatterns = [
     path("student/add/", hod_views.add_student, name='add_student'),
     path("subject/add/", hod_views.add_subject, name='add_subject'),
     path("staff/manage/", hod_views.manage_staff, name='manage_staff'),
+    #path("staff/add/subject", hod_views.add_faculty_subject, name='add_faculty_subject'),#Add Faculty Subject 
     path("student/manage/", hod_views.manage_student, name='manage_student'),
+    path("student/add/subject", hod_views.add_student_subject, name='add_student_subject'),#Add Student Subject
     path("course/manage/", hod_views.manage_course, name='manage_course'),
     path("subject/manage/", hod_views.manage_subject, name='manage_subject'),
     path("staff/edit/<int:staff_id>", hod_views.edit_staff, name='edit_staff'),
@@ -91,11 +93,13 @@ urlpatterns = [
     path("staff/feedback/", staff_views.staff_feedback, name='staff_feedback'),
     path("staff/view/profile/", staff_views.staff_view_profile,
          name='staff_view_profile'),
+    path("staff/view/students/", staff_views.staff_view_students,
+         name='staff_view_students'),
     path("staff/attendance/take/", staff_views.staff_take_attendance,
          name='staff_take_attendance'),
     path("staff/attendance/update/", staff_views.staff_update_attendance,
          name='staff_update_attendance'),
-    path("staff/get_students/", staff_views.get_students, name='get_students'),
+    #path("staff/get_students/", staff_views.get_students, name='get_students'),
     path("staff/attendance/fetch/", staff_views.get_student_attendance,
          name='get_student_attendance'),
     path("staff/attendance/save/",
@@ -105,6 +109,8 @@ urlpatterns = [
     path("staff/fcmtoken/", staff_views.staff_fcmtoken, name='staff_fcmtoken'),
     path("staff/view/notification/", staff_views.staff_view_notification,
          name="staff_view_notification"),
+    path("staff/manage/students/", staff_views.staff_manage_student,
+         name="staff_manage_student"),
     path("staff/result/add/", staff_views.staff_add_result, name='staff_add_result'),
     path("staff/result/edit/", EditResultView.as_view(),
          name='edit_student_result'),
@@ -127,7 +133,10 @@ urlpatterns = [
          name='student_fcmtoken'),
     path("student/view/notification/", student_views.student_view_notification,
          name="student_view_notification"),
-    path('student/view/result/', student_views.student_view_result,
-         name='student_view_result'),
+    #path('student/view/result/', student_views.student_view_result,
+         #name='student_view_result'),
+     path('student/view/subjects/', student_views.student_view_subjects,
+         name='student_view_subjects'),
+         
 
 ]

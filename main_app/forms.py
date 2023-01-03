@@ -52,17 +52,17 @@ class CustomUserForm(FormSettings):
 
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'email', 'gender',  'password','profile_pic', 'address' ]
+        fields = ['first_name', 'last_name', 'email', 'gender', 'password','profile_pic', 'address']
 
 
 class StudentForm(CustomUserForm):
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
+        
 
     class Meta(CustomUserForm.Meta):
         model = Student
-        fields = CustomUserForm.Meta.fields + \
-            ['course', 'session']
+        fields = CustomUserForm.Meta.fields
 
 
 class AdminForm(CustomUserForm):
@@ -77,11 +77,11 @@ class AdminForm(CustomUserForm):
 class StaffForm(CustomUserForm):
     def __init__(self, *args, **kwargs):
         super(StaffForm, self).__init__(*args, **kwargs)
+        
 
     class Meta(CustomUserForm.Meta):
         model = Staff
-        fields = CustomUserForm.Meta.fields + \
-            ['course' ]
+        fields = CustomUserForm.Meta.fields
 
 
 class CourseForm(FormSettings):
@@ -97,11 +97,29 @@ class SubjectForm(FormSettings):
 
     def __init__(self, *args, **kwargs):
         super(SubjectForm, self).__init__(*args, **kwargs)
+        self.fields['course'].required = False
+        self.fields['course'].initial = '1'
+        #self.fields['course'].HiddenInput()
+        
 
     class Meta:
         model = Subject
         fields = ['name', 'staff', 'course']
+        widgets = {'course': forms.HiddenInput()}
+        
+class StudentSubjectForm(FormSettings):
+    
+    def __init__(self, *args, **kwargs):
+        super(StudentSubjectForm, self).__init__(*args, **kwargs)
+        #self.fields['course'].required = False
+        #self.fields['course'].initial = '1'
+        #self.fields['course'].HiddenInput()
+        
 
+    class Meta:
+        model = StudentSubject
+        fields = ['student', 'subject']
+        #widgets = {'course': forms.HiddenInput()}
 
 class SessionForm(FormSettings):
     def __init__(self, *args, **kwargs):

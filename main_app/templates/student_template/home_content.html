@@ -1,6 +1,6 @@
 {% extends 'main_app/base.html' %}
 {% load static %}
-{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block page_title %}Student Dashboard{% endblock page_title %}
 {% block content %}
 
 <section class="content">
@@ -13,7 +13,7 @@
                 <div class="small-box bg-primary">
                     <div class="inner">
                         <h3>{{total_subject}}</h3>
-                        <p>Total Subject</p>
+                        <p>Total Subjects</p>
                     </div>
                     <div class="icon">
                       <i class="nav-icon fas fa-book"></i>
@@ -23,40 +23,7 @@
             </div>
             <!-- ./col -->
         </div>
-        <div class="card card-dark">
-            <div class="card-header"><h3 class="card-title">Class Schedule</h3>
-            </div>
-           <div class="table p-2">
         
-               <table class="table table-bordered">
-                   <tr>
-                       <th>Class</th>
-                       <th>Section</th>
-                       <th>Schedule</th>
-                    <th>Credits</th>
-                </tr>
-                {% for feedback in feedbacks %}
-                <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{feedback.feedback}}</td>
-                    <td>
-                          
-                        {% if feedback.reply == "" %}
-                            <p class="badge badge-warning">No Response Yet</p>
-                            {% else %}
-                            {{feedback.reply}}
-                        {% endif %}
-                            {% include "main_app/form_template.html" with messages=messages  form=form button_text="Submit Feedback"%}
-                    </td>              <td>{{feedback.created_at}}</td>
-                    
-                    </tr>
-                    
-                    {% endfor %}
-                    
-                </table>
-                {% include "main_app/form_template.html" with messages=messages  form=form button_text="Not yet enrolled? Click here!"%}
-            </div>
-            </div>
        </section>
 {% endblock content %}
 
