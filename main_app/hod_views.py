@@ -240,7 +240,7 @@ def manage_staff(request):
     allStaff = CustomUser.objects.filter(user_type=2)
     context = {
         'allStaff': allStaff,
-        'page_title': 'Manage Faculty'
+        'page_title': 'Manage Staff'
     }
     return render(request, "hod_template/manage_staff.html", context)
 
@@ -253,6 +253,15 @@ def manage_student(request):
     }
     return render(request, "hod_template/manage_student.html", context)
 
+def manage_student_subjects(request, student):
+    #id = request.POST.get('id')
+    studentInfo = get_object_or_404(CustomUser, id=student)
+    subjects = StudentSubject.objects.filter(student_id=student)
+    context = {
+        'subjects': subjects,
+        'page_title': 'Manage Student Subjects - ' + str(studentInfo.last_name) + ', ' + str(studentInfo.first_name)+ ' - Student ID: ' + str(studentInfo.id),
+    }
+    return render(request, "hod_template/manage_student_subjects.html", context)
 
 def manage_course(request):
     courses = Course.objects.all()
@@ -289,7 +298,7 @@ def edit_staff(request, staff_id):
             email = form.cleaned_data.get('email')
             gender = form.cleaned_data.get('gender')
             password = form.cleaned_data.get('password') or None
-            course = form.cleaned_data.get('course') or 'BSIT'
+            #course = form.cleaned_data.get('course') or 'BSIT'
             passport = request.FILES.get('profile_pic') or None
             try:
                 user = CustomUser.objects.get(id=staff.admin.id)
@@ -306,7 +315,7 @@ def edit_staff(request, staff_id):
                 user.last_name = last_name
                 user.gender = gender
                 user.address = address
-                staff.course = course
+                #staff.course = course
                 user.save()
                 staff.save()
                 messages.success(request, "Successfully Updated")
@@ -746,6 +755,12 @@ def delete_subject(request, subject_id):
     subject.delete()
     messages.success(request, "Subject deleted successfully!")
     return redirect(reverse('manage_subject'))
+
+def delete_student_subject(request, id):
+    subject = get_object_or_404(StudentSubject, id=id)
+    subject.delete()
+    messages.success(request, "Subject deleted successfully!")
+    return redirect(reverse('manage_student'))
 
 
 def delete_session(request, session_id):

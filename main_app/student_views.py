@@ -16,7 +16,7 @@ from .models import *
 
 def student_home(request):
     student = get_object_or_404(Student, admin=request.user)
-    total_subject = StudentSubject.objects.filter(id=student.id).count()
+    total_subject = StudentSubject.objects.filter(student_id=student.id).count()
     total_attendance = AttendanceReport.objects.filter(student=student).count()
     total_present = AttendanceReport.objects.filter(student=student, status=True).count()
     if total_attendance == 0:  # Don't divide. DivisionByZero
@@ -208,7 +208,7 @@ def student_view_result(request):
 
 def student_view_subjects(request):
     student = get_object_or_404(Student, admin=request.user)
-    subjects = StudentSubject.objects.filter(id=student.id)
+    subjects = StudentSubject.objects.filter(student_id=student.id)
     context = {
         'studentsubject': subjects,
         'page_title': 'View Subjects'

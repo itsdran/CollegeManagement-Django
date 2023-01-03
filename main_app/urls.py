@@ -60,6 +60,7 @@ urlpatterns = [
     path("staff/manage/", hod_views.manage_staff, name='manage_staff'),
     #path("staff/add/subject", hod_views.add_faculty_subject, name='add_faculty_subject'),#Add Faculty Subject 
     path("student/manage/", hod_views.manage_student, name='manage_student'),
+    path("student/manage/subjects/<int:student>", hod_views.manage_student_subjects, name='manage_student_subjects'),
     path("student/add/subject", hod_views.add_student_subject, name='add_student_subject'),#Add Student Subject
     path("course/manage/", hod_views.manage_course, name='manage_course'),
     path("subject/manage/", hod_views.manage_subject, name='manage_subject'),
@@ -77,6 +78,8 @@ urlpatterns = [
 
     path("student/delete/<int:student_id>",
          hod_views.delete_student, name='delete_student'),
+    path("student/delete/subject/<int:id>",
+         hod_views.delete_student_subject, name='delete_student_subject'),
     path("student/edit/<int:student_id>",
          hod_views.edit_student, name='edit_student'),
     path("course/edit/<int:course_id>",
@@ -94,6 +97,8 @@ urlpatterns = [
          name='staff_view_profile'),
     path("staff/view/students/", staff_views.staff_view_students,
          name='staff_view_students'),
+    path("staff/view/subjects/", staff_views.staff_view_subjects,
+         name='staff_view_subjects'),
     path("staff/attendance/take/", staff_views.staff_take_attendance,
          name='staff_take_attendance'),
     path("staff/attendance/update/", staff_views.staff_update_attendance,

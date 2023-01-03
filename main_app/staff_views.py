@@ -62,6 +62,18 @@ def staff_view_students(request):
     }
     return render(request, "staff_template/staff_view_students.html", context)
 
+def staff_view_subjects(request):
+    staff = get_object_or_404(Staff, admin=request.user)
+    subjects = Subject.objects.filter(staff_id=staff.id)
+    #allStudents = CustomUser.objects.filter(user_type=3)
+    #student_info = Student.objects.all().count()
+    context = {
+        'staffsubjects': subjects,
+        #'allStudents': allStudents,
+        'page_title': 'View Subjects'
+    }
+    return render(request, "staff_template/staff_view_subject.html", context)
+
 @csrf_exempt
 def save_attendance(request):
     student_data = request.POST.get('student_ids')
