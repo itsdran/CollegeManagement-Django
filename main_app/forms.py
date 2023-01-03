@@ -97,7 +97,9 @@ class SubjectForm(FormSettings):
 
     def __init__(self, *args, **kwargs):
         super(SubjectForm, self).__init__(*args, **kwargs)
-        self.fields['course'].required = False
+        #self.fields['course'].required = False
+        self.fields['course'].widget.attrs['disabled'] = True
+        self.fields['course'].widget.attrs['readonly'] = True
         self.fields['course'].initial = '1'
         #self.fields['course'].HiddenInput()
         
@@ -105,7 +107,7 @@ class SubjectForm(FormSettings):
     class Meta:
         model = Subject
         fields = ['name', 'staff', 'course']
-        widgets = {'course': forms.HiddenInput()}
+        #widgets = {'course': forms.HiddenInput()}
         
 class StudentSubjectForm(FormSettings):
     
