@@ -11,13 +11,14 @@
 
         <table class="table table-bordered">
             <tr>
+                <th>#</th>
                 <th>Subject ID</th>
                 <th>Subject</th>
                 <th>Staff</th>
             </tr>
             {% for studentsubject in studentsubject %}
             <tr>
-                <!--<td>{{forloop.counter}}</td>-->
+                <td>{{forloop.counter}}</td>
                 <td>{{studentsubject.id}}</td>
                 <td>{{studentsubject.subject}}</td>
                 <td>{{studentsubject.staff}}</td>

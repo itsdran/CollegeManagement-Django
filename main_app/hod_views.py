@@ -256,10 +256,10 @@ def manage_student(request):
 def manage_student_subjects(request, student):
     #id = request.POST.get('id')
     studentInfo = get_object_or_404(CustomUser, id=student)
-    subjects = StudentSubject.objects.filter(student_id=student)
+    subjects = StudentSubject.objects.filter(student_id=studentInfo.id)
     context = {
         'subjects': subjects,
-        'page_title': 'Manage Student Subjects - ' + str(studentInfo.last_name) + ', ' + str(studentInfo.first_name)+ ' - Student ID: ' + str(studentInfo.id),
+        'page_title': 'Manage Student Subjects: ' + 'Student ID: ' + str(studentInfo.id) + ' - ' + str(studentInfo.last_name) + ', ' + str(studentInfo.first_name),
     }
     return render(request, "hod_template/manage_student_subjects.html", context)
 
