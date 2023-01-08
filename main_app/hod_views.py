@@ -215,7 +215,7 @@ def add_student_subject(request):
         if form.is_valid():
             student = form.cleaned_data.get('student')
             subject = form.cleaned_data.get('subject')
-            #staff   = get_object_or_404(CustomUser, id=subject.staff_id)
+            student = get_object_or_404(Student, id=student.admin_id)
             staff = get_object_or_404(Staff, id=subject.staff_id)
             course  = get_object_or_404(Course, id=subject.course_id)
             try:
@@ -283,11 +283,12 @@ def manage_subject(request):
 
 def edit_staff(request, staff_id):
     staff = get_object_or_404(Staff, admin_id=staff_id)
+    studentInfo = get_object_or_404(CustomUser, id=staff.admin_id)
     form = StaffForm(request.POST or None, instance=staff)
     context = {
         'form': form,
         'staff_id': staff_id,
-        'page_title': 'Edit Faculty'
+        'page_title': 'Edit Staff - Staff ID: ' + str(studentInfo.id) + ' - ' + str(studentInfo.last_name) + ', ' + str(studentInfo.first_name)
     }
     if request.method == 'POST':
         if form.is_valid():
@@ -332,11 +333,12 @@ def edit_staff(request, staff_id):
 
 def edit_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
+    studentInfo = get_object_or_404(CustomUser, id=student.admin_id)
     form = StudentForm(request.POST or None, instance=student)
     context = {
         'form': form,
         'student_id': student_id,
-        'page_title': 'Edit Student'
+        'page_title': 'Edit Student - Student ID: ' + str(studentInfo.id) + ' - ' + str(studentInfo.last_name) + ', ' + str(studentInfo.first_name)
     }
     if request.method == 'POST':
         if form.is_valid():
@@ -409,7 +411,7 @@ def edit_subject(request, subject_id):
     context = {
         'form': form,
         'subject': id,
-        'page_title': 'Edit Subject'
+        'page_title': 'Edit Subject - ' + str(instance.name)
     }
     if request.method == 'POST':
         if form.is_valid():
